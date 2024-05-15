@@ -1,12 +1,10 @@
-
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Central Perk Suli - Menu</title>
   <style>
-    /* Styles for header, nav, .content, and .menu-container remain the same */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
@@ -20,23 +18,14 @@
       text-align: center;
     }
     nav {
-    background-color: #d86a6a;
-    padding: 10px;
-    text-align: center;
-  }
-  nav a {
-    color: #fff;
-    text-decoration: none;
-    margin: 0 10px;
-  }
-    /* Additional styles for menu cards */
-    .menu-card {
-      width: calc(50% - 20px); /* Adjust based on the number of items per row */
-      /* Remaining styles remain the same */
-      cursor: pointer;
+      background-color: #d86a6a;
+      padding: 10px;
+      text-align: center;
     }
-    .menu-card{
-      background-color:#452828;
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
     }
     .menu-container {
       display: flex;
@@ -51,6 +40,7 @@
       margin: 10px;
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       overflow: hidden;
+      cursor: pointer;
     }
     .menu-card img {
       width: 100%;
@@ -67,54 +57,56 @@
       margin-top: 5px;
       color: #666;
     }
-    /* Styles for header, .content, .menu-container, and .menu-card remain the same */
-
-/* Styles for header, .content, .menu-container, and .menu-card remain the same */
-
-.cart-sidebar {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  right: 0;
-  background-color: #f9f9f9;
-  overflow-x: hidden;
-  padding-top: 60px;
-  transition: 0.5s;
-  border-left: 1px solid #ccc;
-}
-
-.cart-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 10px;
-}
-
-.cart-header h2 {
-  margin: 0;
-}
-
-.cart-header button {
-  border: none;
-  background-color: transparent;
-  cursor: pointer;
-}
-
-.cart-sidebar ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.cart-sidebar button {
-  margin-top: 20px;
-  background-color: #333;
-  color: #fff;
-  border: none;
-  padding: 10px;
-  cursor: pointer;
-}
-
+    .cart-sidebar {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      z-index: 1;
+      top: 0;
+      right: 0;
+      background-color: #f9f9f9;
+      overflow-x: hidden;
+      padding-top: 60px;
+      transition: 0.5s;
+      border-left: 1px solid #ccc;
+    }
+    .cart-header {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+    }
+    .cart-header h2 {
+      margin: 0;
+    }
+    .cart-header button {
+      border: none;
+      background-color: transparent;
+      cursor: pointer;
+    }
+    .cart-sidebar ul {
+      list-style-type: none;
+      padding: 0;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+    }
+    .cart-item button {
+      background-color: #ff0000;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .cart-sidebar button {
+      margin-top: 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -122,16 +114,14 @@
     <h1>Central Perk Suli - Menu</h1>
   </header>
 
-
   <nav>
     <a href="home.html">Home</a>
     <a href="menu.html">Menu</a>
     <a href="contact.html">Contact</a>
   </nav>
-<div class="content">
-    <!-- Menu content -->
+
+  <div class="content">
     <div class="menu-container" id="menu-container">
-      <!-- Menu Items -->
       <div class="menu-card" onclick="addToCart('Espresso', 2.50)">
         <img src="coffee1.jpg" alt="Coffee 1">
         <div class="menu-card-content">
@@ -140,75 +130,7 @@
           <p>Price: $2.50</p>
         </div>
       </div>
-      
-  <div class="cart-sidebar" id="cart-sidebar">
-    <div class="cart-header">
-      <h2>Cart</h2>
-      <button onclick="closeCart()">Close</button>
-    </div>
-    <ul id="cart-items"></ul>
-    <p id="total-price"></p>
-    <button onclick="submitOrder()">Submit Order</button>
-  </div>
-      <!-- Add more menu items -->
-      <!-- Repeat menu cards as needed -->
-    </div>
-  </div>
-  <div class="cart-sidebar" id="cart-sidebar">
-    <div class="cart-header">
-      <h2>Cart</h2>
-      <button onclick="closeCart()">Close</button>
-    </div>
-    <ul id="cart-items"></ul>
-    <p id="total-price"></p>
-    <button onclick="submitOrder()">Submit Order</button>
-  </div>
-
-  <script src="script.js">
-let cartItems = [];
-
-function addToCart(itemName, itemPrice) {
-  cartItems.push({ name: itemName, price: itemPrice });
-  updateCart();
-}
-
-function updateCart() {
-  const cartList = document.getElementById('cart-items');
-  cartList.innerHTML = '';
-  let totalPrice = 0;
-
-  cartItems.forEach(item => {
-    const listItem = document.createElement('li');
-    listItem.textContent = `${item.name} - $${item.price}`;
-    cartList.appendChild(listItem);
-    totalPrice += item.price;
-  });
-
-  document.getElementById('total-price').textContent = `Total: $${totalPrice.toFixed(2)}`;
-}
-
-function submitOrder() {
-  alert('Order submitted!');
-  cartItems = [];
-  updateCart();
-}
-
-function openCart() {
-  document.getElementById('cart-sidebar').style.width = '250px';
-}
-
-function closeCart() {
-  document.getElementById('cart-sidebar').style.width = '0';
-}
-
-  </script>
-
-
-  <div class="content">
-    <!-- Menu content -->
-    <div class="menu-container" id="menu-container">
-      <!-- Menu Items -->
-      <div class="menu-card" onclick="addToCart('Espresso' , 2.50)">
+      <div class="menu-card" onclick="addToCart('Espresso', 2.50)">
         <img src="coffee1.jpg" alt="Coffee 1">
         <div class="menu-card-content">
           <h2>Espresso</h2>
@@ -216,80 +138,71 @@ function closeCart() {
           <p>Price: $2.50</p>
         </div>
       </div>
-      <div class="menu-card">
-        <img src="coffee2.jpg" alt="Coffee 2">
+      <div class="menu-card" onclick="addToCart('Espresso', 2.50)">
+        <img src="coffee1.jpg" alt="Coffee 1">
         <div class="menu-card-content">
-          <h2>Cappuccino</h2>
-          <p>Espresso mixed with steamed milk foam.</p>
-          <p>Price: $3.00</p>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="coffee3.jpg" alt="Coffee 3">
-        <div class="menu-card-content">
-          <h2>Latte</h2>
-          <p>Espresso with steamed milk and a light layer of foam.</p>
-          <p>Price: $3.50</p>
+          <h2>Espresso</h2>
+          <p>A strong black coffee made by forcing steam through ground coffee beans.</p>
+          <p>Price: $2.50</p>
         </div>
       </div>
       <!-- Add more menu items -->
-      <div class="menu-card">
-        <img src="coffee4.jpg" alt="Coffee 4">
-        <div class="menu-card-content">
-          <h2>Americano</h2>
-          <p>Espresso with hot water, creating a bold and robust flavor.</p>
-          <p>Price: $3.00</p>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="coffee5.jpg" alt="Coffee 5">
-        <div class="menu-card-content">
-          <h2>Mocha</h2>
-          <p>Espresso with steamed milk and chocolate, topped with whipped cream.</p>
-          <p>Price: $4.00</p>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="coffee6.jpg" alt="Coffee 6">
-        <div class="menu-card-content">
-          <h2>Flat White</h2>
-          <p>Espresso with velvety steamed milk, creating a creamy texture.</p>
-          <p>Price: $4.00</p>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="coffee7.jpg" alt="Coffee 7">
-        <div class="menu-card-content">
-          <h2>Machiato</h2>
-          <p>A shot of espresso with a dollop of frothy milk foam.</p>
-          <p>Price: $3.00</p>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="coffee8.jpg" alt="Coffee 8">
-        <div class="menu-card-content">
-          <h2>Irish Coffee</h2>
-          <p>Hot coffee with a shot of Irish whiskey, topped with cream.</p>
-          <p>Price: $5.00</p>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="coffee9.jpg" alt="Coffee 9">
-        <div class="menu-card-content">
-          <h2>Frappuccino</h2>
-          <p>Blended coffee beverage with ice, milk, and flavored syrup, topped with whipped cream.</p>
-          <p>Price: $4.50</p>
-        </div>
-      </div>
-      <div class="menu-card">
-        <img src="coffee10.jpg" alt="Coffee 10">
-        <div class="menu-card-content">
-          <h2>Affogato</h2>
-          <p>A scoop of vanilla ice cream "drowned" in a shot of hot espresso.</p>
-          <p>Price: $4.50</p>
-        </div>
-      </div>
     </div>
   </div>
+
+  <div class="cart-sidebar" id="cart-sidebar">
+    <div class="cart-header">
+      <h2>Cart</h2>
+      <button onclick="closeCart()">Close</button>
+    </div>
+    <ul id="cart-items"></ul>
+    <p id="total-price"></p>
+    <button onclick="submitOrder()">Submit Order</button>
+  </div>
+
+  <script>
+    let cartItems = [];
+
+    function addToCart(itemName, itemPrice) {
+      cartItems.push({ name: itemName, price: itemPrice });
+      updateCart();
+      openCart();
+    }
+
+    function updateCart() {
+      const cartList = document.getElementById('cart-items');
+      cartList.innerHTML = '';
+      let totalPrice = 0;
+
+      cartItems.forEach((item, index) => {
+        const listItem = document.createElement('li');
+        listItem.className = 'cart-item';
+        listItem.innerHTML = `${item.name} - $${item.price.toFixed(2)} <button onclick="removeFromCart(${index})">Delete</button>`;
+        cartList.appendChild(listItem);
+        totalPrice += item.price;
+      });
+
+      document.getElementById('total-price').textContent = `Total: $${totalPrice.toFixed(2)}`;
+    }
+
+    function removeFromCart(index) {
+      cartItems.splice(index, 1);
+      updateCart();
+    }
+
+    function submitOrder() {
+      alert('Order submitted!');
+      cartItems = [];
+      updateCart();
+    }
+
+    function openCart() {
+      document.getElementById('cart-sidebar').style.width = '250px';
+    }
+
+    function closeCart() {
+      document.getElementById('cart-sidebar').style.width = '0';
+    }
+  </script>
 </body>
 </html>
